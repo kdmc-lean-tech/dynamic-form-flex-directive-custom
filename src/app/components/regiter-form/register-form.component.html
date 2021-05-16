@@ -1,0 +1,20 @@
+<h1>Register Form / Dynamic Forms</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- <div [fxLayout]="'column'"> -->
+  <div [fxLayout.lg]="'column'">
+    <app-input-field formControlName="name" [placeholder]="'Name'"></app-input-field>
+    <app-input-field formControlName="email" [placeholder]="'Email'"></app-input-field>
+    <app-input-field formControlName="password" [placeholder]="'Password'"></app-input-field>
+    <app-input-field formControlName="verifyPassword" [placeholder]="'Verify Password'"></app-input-field>
+    <button (click)="addPhone()">Add phone</button>
+    <div formArrayName="phones" *ngFor="let item of phones.controls; let i = index">
+      <div [formGroupName]="i">
+        <app-input-field formControlName="phone" [placeholder]="'Phone'"></app-input-field>
+        <app-input-field formControlName="description" [placeholder]="'Description'"></app-input-field>
+        <button type="button" (click)="removePhone(i)">X</button>
+      </div>
+    </div>
+  </div>
+  <button type="submit" [disabled]="form.invalid">Send</button>
+</form>
